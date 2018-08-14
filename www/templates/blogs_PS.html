@@ -1,0 +1,92 @@
+{% extends "__base__.html" %}
+
+{% block title %}photshop经验教程{% endblock %}
+
+{% block beforehead %}
+
+<script>
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="uk-width-medium-1-5">
+            <div class="uk-panel">
+               <!-- <h3 class="uk-panel-title">...</h3> -->
+                <div class="uk-nav uk-nav-side" data-uk-nav>
+                    <li class="uk-nav-header st-header15px">目录</li>
+                    {% for blog in blogs_PS %}
+                        <li id={{ blog.id }}><a href="/ps/{{ blog.id }}" >{{ blog.name }}</a></li>
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+
+
+        <div class="uk-width-medium-4-5 st-leftline">
+            <article class="uk-article">
+                <h2>{{ blog.name }}</h2>
+
+                <p class="uk-article-meta">
+                    <span class="item"><i class="uk-icon-clock-o"></i> 发表于{{ blog.created_at| datetime }}</span>
+                    <span class="item"><i class="uk-icon-user st-margin5px"></i>{{ blog.user_name }}  </span>
+                    <span class="item"><i class="uk-icon-tag st-margin5px"></i>{{ blog.tag }}</span>
+                    {% if __user__.admin %}
+                         <span class="item"><a target="_blank" class="uk-icon-edit st-margin5px" href="/manage/blogs/edit?id={{ blog.id }}"></a></span>
+                    {% endif %}
+                </p>
+                <p>{{ blog.html_content|safe }}</p>
+            </article>
+
+            <hr class="uk-article-divider">
+
+        {% if __user__ %}
+            <h3>添加评论</h3>
+
+            <article class="uk-comment">
+                <header class="uk-comment-header">
+                    <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ __user__.image }}">
+                    <h4 class="uk-comment-title">{{ __user__.name }}</h4>
+                </header>
+                <div class="uk-comment-body">
+                    <form id="form-comment" class="uk-form">
+                        <div class="uk-alert uk-alert-danger uk-hidden"></div>
+                        <div class="uk-form-row">
+                            <textarea rows="6" placeholder="Say something" style="width:100%;resize:none;"></textarea>
+                        </div>
+                        <div class="uk-form-row">
+                            <button type="submit" class="uk-button uk-button-primary"><i class="uk-icon-comment"></i> 确认</button>
+                        </div>
+                    </form>
+                </div>
+            </article>
+
+            <hr class="uk-article-divider">
+        {% endif %}
+
+            <h3>最近评论</h3>
+
+            <ul class="uk-comment-list">
+                {% for comment in comments %}
+                <li>
+                    <article class="uk-comment">
+                        <header class="uk-comment-header">
+                            <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ comment.user_image }}">
+                            <h4 class="uk-comment-title">{{ comment.user_name }} {% if comment.user_id==blog.user_id %}(作者){% endif %}</h4>
+                            <p class="uk-comment-meta">{{ comment.created_at|datetime }}</p>
+                        </header>
+                        <div class="uk-comment-body">
+                            {{ comment.html_content|safe }}
+                        </div>
+                    </article>
+                </li>
+                {% else %}
+                <p>暂无评论...</p>
+                {% endfor %}
+            </ul>
+
+        </div>
+        <!-- //blog body -->
+
+{% endblock %}

@@ -1,0 +1,47 @@
+/*
+ * custom css
+ */
+a:hover, a:active {
+    text-decoration: none;
+}
+
+#vm {
+    display: none;
+}
+#loading {
+    margin-bottom: 15px;
+}
+#error {
+    display: none;
+    margin-bottom: 15px;
+}
+
+/*My Css*/
+.item{
+    margin-right: 20px;
+}
+
+.st-margin5px{
+    margin-right: 5px;
+  }
+
+.st-header15px{
+    font-size: 15px;
+}
+
+.st-leftline{
+    border-left: 1px solid #E5E5E5;
+}
+
+.st-mybottom20{
+    margin-bottom: 20px !important
+}
+
+.st-icon14px{
+    width: 14px;
+    height: 14px;
+}
+
+.st-rightline{
+    border-right: 1px solid #E5E5E5;
+}

@@ -1,0 +1,40 @@
+{% extends "__base__.html" %}
+
+{% block title %}主页{% endblock %}
+
+{% block beforehead %}
+
+{% endblock %}
+
+{% block content %}
+    <!-- sidebar -->
+    <div class="uk-width-medium-1-5">
+        <div class="uk-panel uk-panel-header">
+            <h3 class="uk-panel-title uk-width-3-4">作者信息</h3>
+            <ul class="uk-list">
+                <li><i class="uk-icon-user st-icon14px st-margin5px"></i>Stella/MoWa</li>
+                <li><i class="uk-icon-envelope st-icon14px st-margin5px"></i>524918010@qq.com</li>
+                <li><i class="uk-icon-star st-icon14px st-margin5px"></i>吃喝玩乐全栈</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //sidebar -->
+    <!-- blog body -->
+    <div class="uk-width-medium-4-5 st-leftline">
+    {% for blog in blogs %}
+        <article class="uk-article">
+            <h2><a target="_blank" href="/blog/{{ blog.id }}">{{ blog.name }}</a></h2>
+            <p class="uk-article-meta">
+                <span class="item"><i class="uk-icon-clock-o"></i> 发表于{{ blog.created_at| datetime }}</span>
+                <span class="item"><i class="uk-icon-user st-margin5px"></i>{{ blog.user_name }}</span>
+                <span class="item"><i class="uk-icon-tag st-margin5px"></i>{{ blog.tag }}</span>
+            </p>
+            <p data-type="content">{{ blog.content}}</p>
+            <p><a target="_blank" href="/blog/{{ blog.id }}">继续阅读<i class="uk-icon-angle-double-right"></i></a></p>
+        </article>
+        <hr class="uk-article-divider">
+    {% endfor %}
+    </div>
+    <!-- //blog body -->
+{% endblock %}
+
