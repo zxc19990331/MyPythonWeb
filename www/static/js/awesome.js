@@ -459,9 +459,9 @@ function getaddrlast() {
 
 function get100char(str, num){
     var num = num||200;
-    len = str.length
     str = str.substr(0,num);
-    str = str.replace(/[*#->]+/g,"");
+    str = str.replace(/<.*>|(!\[\]\(.*\))|[*#->]+/g,"");
+    len = str.length;
     if(len>num){
     str += '...';
     }
